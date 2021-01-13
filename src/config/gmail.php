@@ -96,4 +96,18 @@ return [
 	*/
 
 	'allow_json_encrypt' => env('GOOGLE_ALLOW_JSON_ENCRYPT', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Storage disk to use for json files
+    |--------------------------------------------------------------------------
+    |
+    |   Default is to use the local disk, but if a different disk is required,
+    |   change it here.
+    |
+    |   Note: be careful not to use a disk with public permissions
+    |
+    */
+
+    'storage_disk' => env('GOOGLE_STORAGE_DISK', 'local'),
 ];

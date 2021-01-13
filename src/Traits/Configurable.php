@@ -23,7 +23,7 @@ trait Configurable
 
 	public function config($string = null)
 	{
-		$disk = Storage::disk('local');
+		$disk = Storage::disk($this->_config['gmail.storage_disk']);
 		$fileName = $this->getFileName();
 		$file = "gmail/tokens/$fileName.json";
 		$allowJsonEncrypt = $this->_config['gmail.allow_json_encrypt'];

@@ -55,11 +55,11 @@ class GmailConnection extends Google_Client
 		$file = "gmail/tokens/$fileName.json";
 		$allowJsonEncrypt = $this->_config['gmail.allow_json_encrypt'];
 
-		if (Storage::disk('local')->exists($file)) {
+		if (Storage::disk(config('gmail.storage_disk'))->exists($file)) {
 			if ($allowJsonEncrypt) {
-				$savedConfigToken = json_decode(decrypt(Storage::disk('local')->get($file)), true);
+				$savedConfigToken = json_decode(decrypt(Storage::disk(config('gmail.storage_disk'))->get($file)), true);
 			} else {
-				$savedConfigToken = json_decode(Storage::disk('local')->get($file), true);
+				$savedConfigToken = json_decode(Storage::disk(config('gmail.storage_disk'))->get($file), true);
 			}
 
 			return !empty($savedConfigToken['access_token']);
@@ -146,7 +146,7 @@ class GmailConnection extends Google_Client
 	 */
 	public function saveAccessToken(array $config)
 	{
-		$disk = Storage::disk('local');
+		$disk = Storage::disk(config('gmail.storage_disk'));
 		$fileName = $this->getFileName();
 		$file = "gmail/tokens/$fileName.json";
 		$allowJsonEncrypt = $this->_config['gmail.allow_json_encrypt'];
@@ -240,7 +240,7 @@ class GmailConnection extends Google_Client
 	 */
 	public function deleteAccessToken()
 	{
-		$disk = Storage::disk('local');
+		$disk = Storage::disk(config('gmail.storage_disk'));
 		$fileName = $this->getFileName();
 		$file = "gmail/tokens/$fileName.json";
 
